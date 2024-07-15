@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Screen Chat System</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="left-column">
+            <div class="settings">
+                <h2>指令中心</h2>
+                <!-- Settings options can be added here -->
+				 <div class="container">
+						<div class="item">
+							<div class="image" style="background: rgb(236, 235, 254);">
+							    <img src="{{url_for('static', filename='img/icon1.png') }}" alt="Image 1">
+							</div>
+							<div class="details">
+								<h3>响亮的Slogan</h3>
+								<p>你擅长写宣传口号：1.简短有力；2.突出亮点；3.引发共鸣。 现在你需要根据以下需求写宣传口号：奶茶</p>
+							</div>
+						</div>
+						<div class="item">
+							<div class="image" style="background: rgb(236, 235, 254);">
+								<img src="{{url_for('static', filename='img/icon1.png') }}" alt="Image 2">
+							</div>
+							<div class="details">
+								<h3>押题助手</h3>
+								<p>你擅长考题推测。你需要结合我提供的学科和考点给出示例考题，我提供的内容是：数学正弦定理</p>
+							</div>
+						</div>
+						<!-- 更多的.item 元素 -->
+					</div>
+            </div>
+        </div>
+        <div class="chat-main">
+            <div class="chat-area">
+                <div id="chat-messages"></div>
+            </div>
+            <footer class="chat-footer">
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button id="send-button">发送</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
