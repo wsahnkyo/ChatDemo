@@ -1,4 +1,7 @@
 $(document).ready(function() {
+     var data = {
+            prompt: 'prompt'
+     };
 	    // 当用户按下回车键时发送消息
     $('#message-input').on('keydown', function(event) {
         if (event.keyCode === 13 && !event.shiftKey) { // 检查是否按下了回车键且没有按住Shift键
@@ -6,9 +9,10 @@ $(document).ready(function() {
             var message = $(this).val();
             if (message.trim() !== '') {
                 addMessage('User', message);
+
                 $(this).val('');
-                var response = getResponse(message);
-                addMessage('AI', response);
+                getResponse(message)
+
             }
         }
     });
@@ -22,8 +26,8 @@ $(document).ready(function() {
         if (message.trim() !== '') {
             addMessage('User', message);
             $('#message-input').val('');
-            var response = getResponse(message);
-            addMessage('AI', response);
+            getResponse(message);
+
         }
     });
 
@@ -38,8 +42,22 @@ $(document).ready(function() {
 
     }
 
-    function getResponse(userInput) {
-        // 这里可以是你的 AI 对话逻辑
-        return 'Hello, you said: ' + userInput;
+    function getResponse(prompt){
+     data['prompt']=prompt
+        $.ajax({
+            url: '/chat',
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function(response) {
+                addMessage('AI', response['response']);
+                data['history']=response['history']
+            },
+            error: function(xhr, status, error) {
+                console.error('Login failed:', error);
+            }
+        });
     }
+
 });
